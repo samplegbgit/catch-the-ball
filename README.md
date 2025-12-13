@@ -7,4 +7,6 @@ Added paddle movement using arrow keys. Paddle stays within game area.
 # Day 3
 Added falling ball and continuous animation. Ball resets after reaching bottom.
 
+# Day 4
+Added score, lives, and collision detection. Game now fully playable.
 
