@@ -1,66 +1,56 @@
 const paddle = document.getElementById("paddle");
 const game = document.getElementById("game");
+const scoreText = document.getElementById("score");
 
 let paddleX = 160;
-
 let score = 0;
 let lives = 3;
 
-let scoreBox = document.createElement("div");
-scoreBox.style.color = "#fff";
-scoreBox.style.padding = "10px";
-scoreBox.innerHTML = `Score: ${score} | Lives: ${lives}`;
-game.appendChild(scoreBox);
-
 let ball = document.createElement("div");
-ball.style.width = "20px";
-ball.style.height = "20px";
-ball.style.background = "yellow";
-ball.style.borderRadius = "50%";
-ball.style.position = "absolute";
-ball.style.top = "0px";
+ball.classList.add("ball");
 ball.style.left = Math.random() * 380 + "px";
-
+ball.style.top = "0px";
 game.appendChild(ball);
 
+scoreText.innerHTML = `Score: ${score} | Lives: ${lives}`;
+
 document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") paddleX -= 20;
-    if (e.key === "ArrowRight") paddleX += 20;
+    if (e.key === "ArrowLeft") paddleX -= 25;
+    if (e.key === "ArrowRight") paddleX += 25;
 
     paddleX = Math.max(0, Math.min(320, paddleX));
     paddle.style.left = paddleX + "px";
 });
 
+function resetBall() {
+    ball.style.top = "0px";
+    ball.style.left = Math.random() * 380 + "px";
+}
+
 function dropBall() {
-    let ballTop = parseInt(ball.style.top);
-    let ballLeft = parseInt(ball.style.left);
+    let top = parseInt(ball.style.top);
+    let left = parseInt(ball.style.left);
 
-    ball.style.top = ballTop + 5 + "px";
+    ball.style.top = top + 5 + "px";
 
-    // collision detection
-    if (ballTop > 560 && ballLeft > paddleX && ballLeft < paddleX + 80) {
+    if (top > 560 && left > paddleX && left < paddleX + 80) {
         score++;
-        scoreBox.innerHTML = `Score: ${score} | Lives: ${lives}`;
+        scoreText.innerHTML = `Score: ${score} | Lives: ${lives}`;
         resetBall();
     }
 
-    if (ballTop > 600) {
+    if (top > 600) {
         lives--;
-        scoreBox.innerHTML = `Score: ${score} | Lives: ${lives}`;
+        scoreText.innerHTML = `Score: ${score} | Lives: ${lives}`;
         resetBall();
 
         if (lives === 0) {
-            alert("Game Over! Score: " + score);
+            alert(`Game Over! Your score = ${score}`);
             location.reload();
         }
     }
 
     requestAnimationFrame(dropBall);
-}
-
-function resetBall() {
-    ball.style.top = "0px";
-    ball.style.left = Math.random() * 380 + "px";
 }
 
 dropBall();
