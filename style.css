@@ -1,17 +1,22 @@
 body {
     background: #1e1e1e;
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
+    color: white;
+    text-align: center;
+    font-family: Arial;
 }
 
 #game {
     width: 400px;
     height: 600px;
     background: #2c2c2c;
+    margin: auto;
     position: relative;
     overflow: hidden;
     border-radius: 10px;
+}
+
+#info {
+    padding: 10px;
 }
 
 #paddle {
@@ -21,19 +26,15 @@ body {
     position: absolute;
     bottom: 10px;
     left: 160px;
-    border-radius: 7px;
+    border-radius: 8px;
 }
 
-.ball {
+#ball {
     width: 20px;
     height: 20px;
     background: gold;
     border-radius: 50%;
     position: absolute;
-}
-
-#score {
-    color: white;
-    padding: 10px;
-    font-family: Arial;
+    top: 0;
+    left: 190px;
 }
